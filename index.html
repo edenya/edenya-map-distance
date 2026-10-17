@@ -31,9 +31,12 @@
         </div>
 
         <section class="onglet" id="dp-trajet" role="tabpanel" aria-labelledby="dp-tab-trajet" data-panneau="trajet" hidden>
-            <p class="aide">Cliquez sur le plan : le départ, puis l'arrivée (un nouveau clic la déplace). Un bâtiment se rejoint par le point le plus proche de son pourtour : sa porte peut être n'importe où.</p>
-            <div class="extremites">
-                <button type="button" class="bouton-icone extremites__inverser" data-inverser title="Inverser le départ et l'arrivée" aria-label="Inverser le départ et l'arrivée">⇅</button>
+            <p class="aide">Chaque clic sur le plan place une étape : le départ, l'arrivée, puis autant d'étapes que vous voulez (A → B → C…). Pour en déplacer une, cliquez d'abord sur son champ. Un bâtiment se rejoint par le point le plus proche de son pourtour, et l'on en ressort par où l'on est entré.</p>
+            <div class="etapes" data-etapes></div>
+            <button type="button" class="etape-suivante" data-etape-suivante><span class="pastille" aria-hidden="true">C</span><span data-texte>Ajouter une étape</span></button>
+            <div class="rangee">
+                <button type="button" class="bouton" data-inverser title="Parcourir l'itinéraire dans l'autre sens">⇅ Inverser</button>
+                <button type="button" class="bouton" data-effacer>Tout effacer</button>
             </div>
             <label class="champ"><span>Chemin</span><select data-variante></select></label>
             <div class="resultat" data-resultat aria-live="polite"></div>

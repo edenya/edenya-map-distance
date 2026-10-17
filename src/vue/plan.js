@@ -21,7 +21,7 @@ export const PALETTE = {
     rue: [20, 150, 70, 110],
 };
 const LEGENDE = [
-    ['rue', 'Rues, places et ponts'],
+    ['rue', 'Rues, places, ponts et routes'],
     ['interieur', 'Dans les murs, hors des rues'],
     ['dehors', 'Hors les murs, à travers champs'],
     ['infranchissable', 'Infranchissable'],

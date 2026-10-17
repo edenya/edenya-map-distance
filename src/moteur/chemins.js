@@ -55,16 +55,25 @@ export class Chercheur {
         }
     }
 
+    // Les cases de départ, à leur distance de départ (potentiels, alignés sur departs ; 0 sans eux)
+    partir(departs, potentiels, h) {
+        departs.forEach((s, i) => {
+            const v = potentiels ? potentiels[i] : 0;
+            if (Number.isFinite(v)) {
+                this.dist[s] = v;
+                this.tas.ajouter(s, h ? v + h(s) : v);
+            }
+        });
+    }
+
     // Dijkstra depuis des cases de départ. Avec des cibles (des listes de cases), s'arrête quand
     // chacune a une case atteinte : la plus petite distance de ses cases est alors définitive.
-    // Renvoie this.dist ; this.prec garde les chemins.
-    dijkstra(praticable, departs, cibles = null) {
+    // Des potentiels font partir chaque case de départ de sa propre distance (un itinéraire, où
+    // l'on arrive déjà de quelque part). Renvoie this.dist ; this.prec garde les chemins.
+    dijkstra(praticable, departs, cibles = null, potentiels = null) {
         const { dist, tas, marque } = this;
         this.initialiser();
-        for (const s of departs) {
-            dist[s] = 0;
-            tas.ajouter(s, 0);
-        }
+        this.partir(departs, potentiels, null);
         const appartenance = new Map();
         const atteinte = new Uint8Array(cibles?.length ?? 0);
         let restantes = 0;
@@ -107,7 +116,8 @@ export class Chercheur {
     // A* des départs vers la plus proche des arrivées ; l'heuristique, la distance au cadre des
     // arrivées, ne surestime jamais : le chemin trouvé est le plus court. Renvoie la case
     // d'arrivée atteinte (sa distance est this.dist[fin]), -1 s'il n'y a pas de chemin.
-    aEtoile(praticable, departs, arrivees) {
+    // Les potentiels comme pour dijkstra().
+    aEtoile(praticable, departs, arrivees, potentiels = null) {
         const W = this.grille.largeur;
         const { dist, tas, marque } = this;
         let x0 = Infinity;
@@ -129,10 +139,7 @@ export class Chercheur {
             return Math.hypot(Math.max(x0 - x, 0, x - x1), Math.max(y0 - y, 0, y - y1));
         };
         this.initialiser();
-        for (const s of departs) {
-            dist[s] = 0;
-            tas.ajouter(s, h(s));
-        }
+        this.partir(departs, potentiels, h);
         let fin = -1;
         while (tas.n) {
             tas.retirer();
@@ -150,6 +157,15 @@ export class Chercheur {
             marque[k] = 0;
         }
         return fin;
+    }
+
+    // La case de départ d'où vient le chemin qui mène à une case
+    origine(fin) {
+        let k = fin;
+        while (this.prec[k] >= 0) {
+            k = this.prec[k];
+        }
+        return k;
     }
 
     // Le chemin qui mène à une case, en points du plan (le milieu de chaque case), simplifié

@@ -6,7 +6,8 @@
     "calques": {
         "rues": [
             "rues",
-            "ponts"
+            "ponts",
+            "chemins"
         ],
         "ponts": [
             "ponts"

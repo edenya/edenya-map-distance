@@ -54,6 +54,11 @@ export class Moteur {
         return this.demander('trajet', { depart, arrivee, variante, marge });
     }
 
+    // Le plus court chemin qui passe par chaque étape, dans l'ordre
+    itineraire(etapes, variante, marge, progression) {
+        return this.demander('itineraire', { etapes, variante, marge }, progression);
+    }
+
     matrice(reperes, variante, marge, progression) {
         return this.demander('matrice', { reperes, variante, marge }, progression);
     }

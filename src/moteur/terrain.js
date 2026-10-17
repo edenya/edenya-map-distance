@@ -60,8 +60,9 @@ export class Terrain {
         }
         const { rues, obstacles, interieur, portes: ouvertes, murs, eau, ponts } = this;
         this.praticables = {
-            // par les rues, les places et les ponts, à l'intérieur des murs
-            rues: this.variante(i => (rues[i] && !obstacles[i] && interieur[i]) || (ouvertes[i] && !obstacles[i])),
+            // par les rues, les places et les ponts de la ville, par les routes au-dehors (le rôle
+            // rues compte les deux), les murs seulement aux portes
+            rues: this.variante(i => (rues[i] && !obstacles[i] && (!murs[i] || ouvertes[i])) || (ouvertes[i] && !obstacles[i])),
             // tout l'espace libre des murs : parcs et jardins ouverts compris
             ouvert: this.variante(i => interieur[i] || (ouvertes[i] && !obstacles[i])),
             // dedans et dehors, à travers champs, les murs seulement aux portes

@@ -6,7 +6,7 @@ import { creer, creerSvg, formeSvg, points } from './dom.js';
 
 // Les trois façons de marcher du moteur (moteur/terrain.js, VARIANTES)
 export const VARIANTES = {
-    rues: { libelle: 'Par les rues, les places et les ponts', aide: "Dans les murs seulement ; on n'en sort que par les portes." },
+    rues: { libelle: 'Par les rues et les routes', aide: "Les rues, les places et les ponts de la ville, les routes au-dehors ; la muraille ne se franchit qu'aux portes." },
     ouvert: { libelle: 'Dans les murs, parcs et jardins compris', aide: "Tout l'espace libre des murs, les parcs et les jardins ouverts compris." },
     partout: { libelle: 'Partout, à travers champs', aide: "Dedans et dehors ; la muraille ne se franchit qu'aux portes." },
 };

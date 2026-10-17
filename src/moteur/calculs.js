@@ -81,19 +81,66 @@ export class Calculs {
 
     // { depart, arrivee, variante, marge } : le plus court chemin entre deux repères
     trajet(m) {
+        const r = this.itineraire({ etapes: [m.depart, m.arrivee], variante: m.variante, marge: m.marge });
+        return { departs: r.acces[0], arrivees: r.acces[1], distance: r.distance, volDOiseau: r.volDOiseau, chemin: r.troncons[0]?.chemin ?? null };
+    }
+
+    // { etapes: [geo…], variante, marge } : le plus court chemin qui passe par chaque étape, dans
+    // l'ordre. La porte d'un bâtiment peut être n'importe où sur son pourtour, mais on entre dans
+    // une étape et on en ressort par la même : celle qui rend tout l'itinéraire le plus court.
+    // Rend { acces (le nombre de cases praticables de chaque étape), troncons: [{ distance,
+    // volDOiseau, chemin }], distance, volDOiseau, sansChemin (le premier tronçon sans chemin) }.
+    itineraire(m, progresser = sansSuivi) {
         this.pret();
+        const { chercheur } = this;
         const praticable = this.terrain.praticable(m.variante);
-        const a = this.casesDe(m.depart, m.variante, m.marge);
-        const b = this.casesDe(m.arrivee, m.variante, m.marge);
-        const resultat = { departs: a.length, arrivees: b.length, distance: null, volDOiseau: null, chemin: null };
-        if (!a.length || !b.length) {
+        const cases = m.etapes.map(g => this.casesDe(g, m.variante, m.marge));
+        const n = cases.length;
+        const resultat = { acces: cases.map(c => c.length), troncons: [], distance: null, volDOiseau: null, sansChemin: null };
+        if (n < 2 || cases.some(c => !c.length)) {
             return resultat;
         }
-        resultat.volDOiseau = dixieme(volDOiseau(this.grille, a, b));
-        const fin = this.chercheur.aEtoile(praticable, a, b);
-        if (fin >= 0) {
-            resultat.distance = dixieme(this.chercheur.dist[fin]);
-            resultat.chemin = this.chercheur.trace(fin);
+        const vols = cases.slice(1).map((c, k) => volDOiseau(this.grille, cases[k], c));
+        resultat.troncons = vols.map(v => ({ distance: null, volDOiseau: dixieme(v), chemin: null }));
+        resultat.volDOiseau = dixieme(vols.reduce((s, v) => s + v, 0));
+
+        // À l'aller, la distance depuis le départ de chaque case de chaque étape intermédiaire,
+        // en passant par les étapes d'avant
+        const potentiels = [cases[0].map(() => 0)];
+        for (let k = 0; k < n - 2; k++) {
+            progresser(k, n - 1, m.etapes[k + 1].nom);
+            const suivante = cases[k + 1];
+            if (suivante.length === 1) {
+                const fin = chercheur.aEtoile(praticable, cases[k], suivante, potentiels[k]);
+                potentiels.push([fin >= 0 ? chercheur.dist[fin] : Infinity]);
+            } else {
+                // chaque case de l'étape est une cible : il les faut toutes
+                const dist = chercheur.dijkstra(praticable, cases[k], suivante.map(c => [c]), potentiels[k]);
+                potentiels.push(suivante.map(c => dist[c]));
+            }
+            if (!potentiels[k + 1].some(Number.isFinite)) {
+                resultat.sansChemin = k;
+                return resultat;
+            }
+        }
+        // La case de la dernière étape la plus proche, au bout de tout l'itinéraire
+        progresser(n - 2, n - 1, m.etapes[n - 1].nom);
+        let cible = chercheur.aEtoile(praticable, cases[n - 2], cases[n - 1], potentiels[n - 2]);
+        if (cible < 0) {
+            resultat.sansChemin = n - 2;
+            return resultat;
+        }
+        resultat.distance = dixieme(chercheur.dist[cible]);
+        // Au retour, chaque tronçon : de la case retenue de son arrivée vers son étape de départ,
+        // dont la case d'où il part devient l'arrivée du tronçon d'avant
+        for (let k = n - 2; k >= 0; k--) {
+            if (k < n - 2) {
+                chercheur.aEtoile(praticable, cases[k], [cible], potentiels[k]);
+            }
+            const origine = chercheur.origine(cible);
+            resultat.troncons[k].distance = dixieme(chercheur.dist[cible] - chercheur.dist[origine]);
+            resultat.troncons[k].chemin = chercheur.trace(cible);
+            cible = origine;
         }
         return resultat;
     }

@@ -9,6 +9,7 @@ const traitements = {
     preparer: (m, progresser) => calculs.preparer(m, progresser),
     portes: m => calculs.portes(m),
     trajet: m => calculs.trajet(m),
+    itineraire: (m, progresser) => calculs.itineraire(m, progresser),
     matrice: (m, progresser) => calculs.matrice(m, progresser),
     places: (m, progresser) => calculs.places(m, progresser),
 };

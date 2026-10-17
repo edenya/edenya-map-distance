@@ -1,7 +1,7 @@
 # Distances sur le plan
 
 Les distances et les temps de trajet à pied sur le plan vectoriel d'une ville d'Edenya (Vahal pour
-l'instant) : par le plus court chemin, par les rues, les places et les ponts, sans jamais traverser
+l'instant) : par le plus court chemin, par les rues, les places, les ponts et les routes, sans jamais traverser
 une maison ni une muraille, sauf par ses portes. C'est ce calcul qui donne la page « La ville et les
 distances » du wiki d'Edenya (17 octobre 2026), à l'échelle retenue pour Vahal : **une unité du plan
 vaut 0,5 m**, une case de la grille du plan 125 m.
@@ -56,12 +56,17 @@ et `OffscreenCanvas`).
 
 ## Utiliser l'application
 
-- **Trajet** : un clic sur le plan pour le départ, un clic pour l'arrivée (un nouveau clic la
-  déplace), ou un choix dans la liste. La page trace le chemin et donne la distance arrondie comme
-  sur le wiki, le vol d'oiseau et le détour, la durée à chaque allure (`vitesses`), la longueur
-  exacte, et la ligne à coller dans le tableau du wiki. Trois façons de marcher : par les rues (dans
-  les murs), dans les murs avec les parcs et jardins, partout à travers champs (la muraille
-  seulement aux portes).
+- **Trajet** : un itinéraire de deux étapes ou plus (A → B → C…). Chaque clic sur le plan place
+  une étape : le départ, l'arrivée, puis une nouvelle étape à chaque clic ; pour en déplacer une, on
+  clique d'abord sur son champ. Une étape se choisit aussi dans la liste, se retire (×), et
+  « Inverser » parcourt l'itinéraire dans l'autre sens. La page trace le chemin et donne la distance
+  arrondie comme sur le wiki, le vol d'oiseau et le détour, la durée à chaque allure (`vitesses`),
+  la longueur exacte, le détail de chaque tronçon (survoler une ligne le montre sur le plan), et le
+  tableau à coller dans le wiki (un tronçon par ligne, l'itinéraire entier en dernière). Un bâtiment
+  pris pour étape s'entre et se quitte par la même porte, celle qui rend tout l'itinéraire le plus
+  court. Trois façons de marcher : par les rues et les routes (les rues, places et ponts de la
+  ville, les routes au-dehors), dans les murs avec les parcs et jardins, partout à travers champs ;
+  la muraille ne se franchit qu'aux portes.
 - **Tableaux** : les distances entre tous les repères d'un groupe (`en_ville`, `hors_les_murs`), en
   mètres, à vol d'oiseau, en détour ou en minutes ; survoler une case montre son chemin, un clic
   l'épingle et peut l'ajouter aux trajets choisis. Les trajets choisis (`trajets`) sont ceux de la
@@ -137,7 +142,7 @@ celle de Vahal), puis l'exporter.
 | `base` | la base Docker du jeu où l'exporteur lit les bâtiments |
 | `echelle` | mètres par unité du plan |
 | `arrondi` | le pas d'arrondi des distances au-delà de 100 m |
-| `calques` | les calques du SVG (leur `id`) qui jouent chaque rôle : `rues` (ce qui se parcourt), `ponts`, `obstacles` (les maisons), `murs`, `eau` |
+| `calques` | les calques du SVG (leur `id`) qui jouent chaque rôle : `rues` (ce qui se parcourt : à Vahal les rues, les ponts et les routes du dehors, `chemins`), `ponts`, `obstacles` (les maisons), `murs`, `eau` |
 | `interieur` | un point à l'intérieur des murs : l'intérieur est tout ce qui s'en atteint sans franchir un mur, l'eau ou une maison |
 | `portes` | chaque porte, un point au milieu de son passage ; un disque de `rayon_porte` unités y ouvre la muraille |
 | `marge_batiment` | autour d'un bâtiment, la bande où l'on peut en trouver la porte (en unités) |
@@ -166,6 +171,12 @@ de Dijkstra sur cette grille (A* pour un seul trajet : même résultat, plus vit
 directions (l'écart avec la vraie longueur d'un trajet reste sous 3 %), sans couper les coins des
 maisons. Le plan de Vahal fait 2 088 × 1 971 unités : quatre millions de cases. Dans la page, le
 calcul tourne dans un Web Worker pour ne pas la figer.
+
+Un itinéraire à plusieurs étapes se calcule en deux passes. À l'aller, chaque étape intermédiaire
+reçoit, pour chacune de ses portes possibles, la plus courte distance depuis le départ en passant
+par les étapes d'avant (Dijkstra parti de l'étape précédente, chaque case à sa propre distance) ; au
+retour, depuis la case la plus proche de l'arrivée, chaque tronçon remonte vers la porte qui le
+rend le plus court. C'est ce qui fait entrer et sortir d'un bâtiment par la même porte.
 
 Les résultats ont été comparés, le 17 octobre 2026, à ceux du premier outil (un script PHP qui
 faisait calculer Chrome) : distances, vols d'oiseau, intérieur des murs et places identiques au
