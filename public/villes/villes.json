@@ -1,0 +1,8 @@
+{
+    "vahal": {
+        "titre": "Vahal",
+        "configuration": "vahal/configuration.json",
+        "dessin": "vahal/plan.svg",
+        "lieux": "vahal/lieux.json"
+    }
+}

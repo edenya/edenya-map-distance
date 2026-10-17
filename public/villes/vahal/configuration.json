@@ -1,0 +1,314 @@
+{
+    "ville": "1",
+    "base": "edenya_v4",
+    "echelle": 0.5,
+    "arrondi": 10,
+    "calques": {
+        "rues": [
+            "rues",
+            "ponts"
+        ],
+        "ponts": [
+            "ponts"
+        ],
+        "obstacles": [
+            "maisons"
+        ],
+        "murs": [
+            "murailles"
+        ],
+        "eau": [
+            "riviere",
+            "mer",
+            "mer-large",
+            "mer-profonde"
+        ]
+    },
+    "interieur": [
+        699,
+        946
+    ],
+    "portes": {
+        "Grand' Porte": [
+            553,
+            1050
+        ],
+        "Porte Nord": [
+            1310,
+            540
+        ],
+        "Porte Sud": [
+            1340,
+            1579
+        ]
+    },
+    "rayon_porte": 30,
+    "marge_batiment": 6,
+    "en_ville": [
+        {
+            "nom": "Tour Blanche",
+            "lieu": "La tour Blanche"
+        },
+        {
+            "nom": "Grand' Place",
+            "lieu": "La Grand' Place",
+            "centre": true
+        },
+        {
+            "nom": "Pl. Grand Chêne",
+            "batiment": [
+                "GC",
+                60
+            ],
+            "centre": true,
+            "libelle": "Place du Grand Chêne"
+        },
+        {
+            "nom": "Pl. Vieux Chêne",
+            "batiment": [
+                "VC",
+                120
+            ],
+            "centre": true,
+            "libelle": "Place du Vieux Chêne"
+        },
+        {
+            "nom": "Poste de garde",
+            "batiment": [
+                "GU",
+                25
+            ]
+        },
+        {
+            "nom": "Arènes",
+            "batiment": [
+                "GU",
+                30
+            ]
+        },
+        {
+            "nom": "Entrepôt",
+            "batiment": [
+                "PT",
+                11
+            ]
+        },
+        {
+            "nom": "Quais",
+            "point": [
+                1650,
+                820
+            ],
+            "libelle": "Port"
+        },
+        {
+            "nom": "Grand' Porte",
+            "porte": "Grand' Porte"
+        },
+        {
+            "nom": "Porte Nord",
+            "porte": "Porte Nord"
+        },
+        {
+            "nom": "Porte Sud",
+            "porte": "Porte Sud"
+        }
+    ],
+    "hors_les_murs": [
+        {
+            "nom": "Grand' Porte",
+            "porte": "Grand' Porte"
+        },
+        {
+            "nom": "Porte Nord",
+            "porte": "Porte Nord"
+        },
+        {
+            "nom": "Porte Sud",
+            "porte": "Porte Sud"
+        },
+        {
+            "nom": "Écurie",
+            "batiment": [
+                "PO",
+                1
+            ]
+        },
+        {
+            "nom": "Moulin Roux",
+            "batiment": [
+                "PL",
+                4
+            ],
+            "libelle": "Moulins de la Plaine"
+        },
+        {
+            "nom": "Moulin Avant",
+            "batiment": [
+                "PL",
+                5
+            ]
+        },
+        {
+            "nom": "Cimetière",
+            "batiment": [
+                "PN",
+                1
+            ]
+        },
+        {
+            "nom": "Puits aux Lucioles",
+            "batiment": [
+                "PN",
+                2
+            ]
+        },
+        {
+            "nom": "Plage de Nacre",
+            "batiment": [
+                "PN",
+                3
+            ],
+            "centre": true
+        },
+        {
+            "nom": "Banc de Sable",
+            "batiment": [
+                "PS",
+                2
+            ],
+            "centre": true
+        }
+    ],
+    "rayon_places": 18,
+    "places": [
+        {
+            "nom": "Grand' Place",
+            "point": [
+                699,
+                946
+            ]
+        },
+        {
+            "nom": "Pl. Grand Chêne",
+            "point": [
+                880,
+                655
+            ]
+        },
+        {
+            "nom": "Pl. Vieux Chêne",
+            "point": [
+                1468,
+                694
+            ]
+        }
+    ],
+    "vitesses": {
+        "À pied": 4.5,
+        "Charrette": 3
+    },
+    "variante_trajets": "ouvert",
+    "trajets": {
+        "en_ville": [
+            [
+                "Grand' Porte",
+                "Grand' Place"
+            ],
+            [
+                "Grand' Porte",
+                "Tour Blanche"
+            ],
+            [
+                "Grand' Porte",
+                "Porte Nord"
+            ],
+            [
+                "Grand' Porte",
+                "Porte Sud"
+            ],
+            [
+                "Grand' Porte",
+                "Quais"
+            ],
+            [
+                "Porte Nord",
+                "Porte Sud"
+            ],
+            [
+                "Porte Nord",
+                "Pl. Vieux Chêne"
+            ],
+            [
+                "Porte Nord",
+                "Quais"
+            ],
+            [
+                "Porte Sud",
+                "Arènes"
+            ],
+            [
+                "Porte Sud",
+                "Poste de garde"
+            ],
+            [
+                "Grand' Place",
+                "Pl. Grand Chêne"
+            ],
+            [
+                "Grand' Place",
+                "Tour Blanche"
+            ],
+            [
+                "Grand' Place",
+                "Poste de garde"
+            ],
+            [
+                "Tour Blanche",
+                "Quais"
+            ],
+            [
+                "Tour Blanche",
+                "Arènes"
+            ],
+            [
+                "Pl. Vieux Chêne",
+                "Entrepôt"
+            ],
+            [
+                "Poste de garde",
+                "Arènes"
+            ]
+        ],
+        "hors_les_murs": [
+            [
+                "Porte Nord",
+                "Cimetière"
+            ],
+            [
+                "Porte Nord",
+                "Puits aux Lucioles"
+            ],
+            [
+                "Porte Nord",
+                "Plage de Nacre"
+            ],
+            [
+                "Porte Sud",
+                "Banc de Sable"
+            ],
+            [
+                "Grand' Porte",
+                "Écurie"
+            ],
+            [
+                "Grand' Porte",
+                "Moulin Roux"
+            ],
+            [
+                "Porte Sud",
+                "Moulin Roux"
+            ]
+        ]
+    }
+}

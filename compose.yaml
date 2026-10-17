@@ -1,0 +1,23 @@
+# docker compose up -d --build           l'application construite, sur http://localhost:8090
+# docker compose --profile dev up        le serveur de développement de Vite, sur http://localhost:5173
+services:
+  web:
+    build: .
+    ports:
+      - "${PORT:-8090}:80"
+
+  dev:
+    profiles: [dev]
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_SONDER: "1"
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:

@@ -1,0 +1,43 @@
+This license is a legal agreement between you and Edenya for the use of Edenya (the "Software"). By downloading or contributing Edenya or any Edenya Modules, you agree to be bound by the terms and conditions of this license. Edenya reserves the right to alter this agreement at any time, for any reason, without notice.
+Edenya will be the only proprietary of the source code.
+
+Revised on: 23 October, 2008
+
+
+PERMITTED USE
+
+* Core License: Users of the Core License may use the Software only on a developpment website and should not be visible from the Internet.
+
+* Commercial License: Users of the Commercial License may use the Software on a website engaging a nonprofit, a commercial, or for-profit activities (any activities actually). Websites engaging in direct or indirect commercial activities must purchase a Commercial License. One license grants the right to perform one installation of the Software. Each additional installation of the Software requires an additional purchased license.
+
+Edenya will be the sole arbiter as to what constitutes commercial activities.
+
+RESTRICTIONS
+Unless you have been granted prior, written consent from Edenya, you may not:
+
+* Use the Software as the basis of a hosted weblogging service, or to provide hosting services to others.
+* Reproduce, distribute, or transfer the Software, or portions thereof, to any third party.
+* Use, sell, rent, lease, assign, or sublet the Software or portions thereof, including data.
+* Grant rights to any other person.
+* Use the Software in violation of any U.S. or international law, regulation or copyright.
+
+DISPLAY OF COPYRIGHT NOTICES
+All copyright and proprietary notices and logos in the Control Panel and within the Software files must remain intact.
+
+MAKING COPIES
+You may make copies of the Software for back-up purposes, provided that you reproduce the Software in its original form and with all proprietary notices on the back-up copy.
+
+SOFTWARE MODIFICATION
+You may alter, modify, or extend the Software for your own use, or commission a third-party to perform modifications for you, but you may not resell, redistribute or transfer the modified or derivative version without prior written consent from Edenya Components from the Software may not be extracted and used in other programs without prior written consent from Edenya
+
+REFUNDS
+Due to the non-returnable nature of downloadable software, Edenya does not issue refunds once a transaction has been completed. All software offered by EllisLab is available for free evaluation prior to purchasing. We encourage you to thoroughly test the system you are interested in before purchasing to determine its suitability for your purposes and compatibility with your hosting account.
+
+INDEMNITY
+You agree to indemnify and hold harmless Edenya and Christophe Dri for any third-party claims, actions or suits, as well as any related expenses, liabilities, damages, settlements or fees arising from your use or misuse of the Software, or a violation of any terms of this license.
+
+DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF QUALITY, PERFORMANCE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.  FURTHER, Edenya DOES NOT WARRANT THAT THE SOFTWARE OR ANY RELATED SERVICE WILL ALWAYS BE AVAILABLE.
+Limitations Of Liability
+
+YOU ASSUME ALL RISK ASSOCIATED WITH THE INSTALLATION AND USE OF THE SOFTWARE. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS OF THE SOFTWARE BE LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE. LICENSE HOLDERS ARE SOLELY RESPONSIBLE FOR DETERMINING THE APPROPRIATENESS OF USE AND ASSUME ALL RISKS ASSOCIATED WITH ITS USE, INCLUDING BUT NOT LIMITED TO THE RISKS OF PROGRAM ERRORS, DAMAGE TO EQUIPMENT, LOSS OF DATA OR SOFTWARE PROGRAMS, OR UNAVAILABILITY OR INTERRUPTION OF OPERATIONS.

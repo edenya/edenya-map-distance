@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distances sur le plan</title>
+<meta name="description" content="Distances à pied sur le plan d'une ville d'Edenya, par le plus court chemin.">
+<link rel="stylesheet" href="/src/css/app.css">
+<script type="module" src="/src/main.js"></script>
+</head>
+<body>
+<div class="application">
+    <header class="entete">
+        <h1>Distances à <span data-ville>…</span></h1>
+        <div class="statut" data-statut role="status" hidden>
+            <span data-statut-texte></span>
+            <progress max="1"></progress>
+        </div>
+    </header>
+
+    <main class="plan" data-plan tabindex="0" aria-label="Plan de la ville : glisser pour se déplacer, molette ou + et - pour zoomer, 0 pour tout voir"></main>
+
+    <div class="separateur" data-separateur role="separator" aria-orientation="vertical" aria-label="Largeur du panneau" tabindex="0"></div>
+
+    <aside class="panneau">
+        <div class="onglets" role="tablist" aria-label="Mesures">
+            <button type="button" role="tab" id="dp-tab-trajet" aria-controls="dp-trajet" data-onglet="trajet">Trajet</button>
+            <button type="button" role="tab" id="dp-tab-tableaux" aria-controls="dp-tableaux" data-onglet="tableaux">Tableaux</button>
+            <button type="button" role="tab" id="dp-tab-places" aria-controls="dp-places" data-onglet="places">Places</button>
+            <button type="button" role="tab" id="dp-tab-reglages" aria-controls="dp-reglages" data-onglet="reglages">Réglages</button>
+        </div>
+
+        <section class="onglet" id="dp-trajet" role="tabpanel" aria-labelledby="dp-tab-trajet" data-panneau="trajet" hidden>
+            <p class="aide">Cliquez sur le plan : le départ, puis l'arrivée (un nouveau clic la déplace). Un bâtiment se rejoint par le point le plus proche de son pourtour : sa porte peut être n'importe où.</p>
+            <div class="extremites">
+                <button type="button" class="bouton-icone extremites__inverser" data-inverser title="Inverser le départ et l'arrivée" aria-label="Inverser le départ et l'arrivée">⇅</button>
+            </div>
+            <label class="champ"><span>Chemin</span><select data-variante></select></label>
+            <div class="resultat" data-resultat aria-live="polite"></div>
+        </section>
+
+        <section class="onglet" id="dp-tableaux" role="tabpanel" aria-labelledby="dp-tab-tableaux" data-panneau="tableaux" hidden>
+            <div class="rangee">
+                <label class="champ"><span>Repères</span><select data-groupe></select></label>
+                <label class="champ champ--large"><span>Chemin</span><select data-variante></select></label>
+            </div>
+            <details class="bloc" open>
+                <summary>Les repères <span data-compte></span></summary>
+                <div data-liste></div>
+            </details>
+            <div class="rangee">
+                <button type="button" class="bouton bouton--principal" data-calculer>Calculer les distances</button>
+                <span class="attente" data-attente hidden>Calcul…</span>
+            </div>
+            <div data-resultats hidden>
+                <div class="rangee">
+                    <label class="champ"><span>Afficher</span><select data-unite></select></label>
+                    <button type="button" class="bouton" data-copier-matrice>Copier pour le wiki</button>
+                </div>
+                <div class="defile"><table class="matrice" data-matrice></table></div>
+                <p class="note" data-note></p>
+                <p class="rangee"><button type="button" class="bouton" data-ajout-trajet hidden>Ajouter la case épinglée aux trajets choisis</button></p>
+                <h2>Trajets choisis</h2>
+                <div class="defile"><table class="trajets" data-trajets></table></div>
+                <div class="rangee">
+                    <button type="button" class="bouton" data-copier-trajets>Copier pour le wiki</button>
+                    <button type="button" class="bouton" data-telecharger>Télécharger (JSON)</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="onglet" id="dp-places" role="tabpanel" aria-labelledby="dp-tab-places" data-panneau="places" hidden>
+            <p class="aide">Une place est ce qui reste de l'espace libre quand on en retire tout passage plus étroit que deux fois le rayon : une place y survit, une rue non. Chaque place se mesure autour de son point.</p>
+            <div data-liste></div>
+            <div class="rangee">
+                <button type="button" class="bouton bouton--principal" data-mesurer>Mesurer les places</button>
+                <span class="attente" data-attente hidden>Mesure…</span>
+            </div>
+            <div class="defile"><table class="places" data-places hidden></table></div>
+            <p class="note" data-interieur></p>
+        </section>
+
+        <section class="onglet" id="dp-reglages" role="tabpanel" aria-labelledby="dp-tab-reglages" data-panneau="reglages" hidden>
+            <fieldset class="bloc">
+                <legend>Échelle et allures</legend>
+                <div data-reglages="echelle arrondi"></div>
+                <div data-vitesses></div>
+            </fieldset>
+            <fieldset class="bloc">
+                <legend>Terrain</legend>
+                <div data-reglages="rayon_porte marge_batiment rayon_places"></div>
+            </fieldset>
+            <fieldset class="bloc">
+                <legend>Configuration</legend>
+                <p class="aide">Les réglages, les repères, les places et les trajets modifiés ici ne vivent que dans cette page. Pour les garder, téléchargez la configuration et remplacez le fichier de la ville.</p>
+                <p><button type="button" class="bouton" data-telecharger-config>Télécharger la configuration</button></p>
+                <p class="note" data-export></p>
+            </fieldset>
+        </section>
+    </aside>
+</div>
+<datalist id="dp-catalogue"></datalist>
+</body>
+</html>
